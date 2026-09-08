@@ -8,13 +8,13 @@ export default function page() {
 
   let { id } = useParams();
 
-  let Contact = employees.find(
-    (item) => item.id === Number(id) && item.module === "emergency-contacts")
+  let History = employees.find(
+    (item) => item.id === Number(id) && item.module === "employee-history")
   return (
     <div>
       <EditForm
-        title="Edit Contact Details"
-        data={Contact}
+        title="Edit History Details"
+        data={History}
       />
     </div>
   )

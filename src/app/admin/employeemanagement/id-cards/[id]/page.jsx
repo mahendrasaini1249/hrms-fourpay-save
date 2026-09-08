@@ -1,6 +1,6 @@
 "use client";
 
-import View from "@/app/components/view/View";
+import IdCard from "@/app/components/employee/IdCard";
 import employees from "@/app/data/employee-management";
 import { useParams } from "next/navigation";
 import React from "react";
@@ -9,13 +9,13 @@ export default function Page() {
 
   const { id } = useParams();
 
-  const History = employees.find(
+  const IdData = employees.find(
     (item) =>
       item.id === Number(id) &&
-      item.module === "employee-history"
+      item.module === "employee-id-cards"
   );
 
-  if (!History) {
+  if (!IdData) {
     return (
       <div className="p-6">
         ID Card not found
@@ -25,8 +25,7 @@ export default function Page() {
 
   return (
     <div>
-      <View title="Details"
-        data={History} />
+      <IdCard data={IdData} />
     </div>
   );
 }

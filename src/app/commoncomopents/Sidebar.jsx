@@ -22,7 +22,7 @@ export default function Sidebar() {
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-blue-600 font-bold">
             H
           </div>
-          <Link href={"/dashboard/overview"}>
+          <Link href={"/admin/dashboard"}>
             <div>
               <h1 className="text-lg font-bold">HRMS</h1>
               <p className="text-xs text-slate-400">Admin Panel</p>
@@ -33,7 +33,7 @@ export default function Sidebar() {
 
       {/* Sidebar Menu */}
       <nav className="flex-1 overflow-y-auto overflow-x-hidden p-4 scrollbar-hide">
-        <Link href={"/"}>
+        <Link href={"/admin/dashboard"}>
           <button className="flex w-full items-center gap-3 rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-blue-700">
             <LayoutDashboard size={19} strokeWidth={2} />
             <span>Dashboard</span>

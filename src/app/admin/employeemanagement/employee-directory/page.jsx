@@ -6,12 +6,11 @@ import React from "react";
 
 export default function Page() {
 
-  let Exit = employees.filter(
-    (item) => item.module === "exit-employees"
+  let employeeData = employees.filter(
+    (item) => item.module === "employee-directory"
   );
 
   let columns = [
-
     {
       key: "employeeId",
       label: "Employee ID"
@@ -20,18 +19,17 @@ export default function Page() {
       key: "employeeName",
       label: "Employee Name"
     },
-
     {
-      key: "joiningDate",
-      label: "joining Date"
+      key: "department",
+      label: "Department"
     },
     {
-      key: "exitDate",
-      label: "exit Date"
+      key: "designation",
+      label: "Designation"
     },
     {
-      key: "exitType",
-      label: "exit Type"
+      key: "phone",
+      label: "phone"
     },
     {
       key: "status",
@@ -54,12 +52,12 @@ export default function Page() {
   return (
     <div>
       <OrganizationTable
-        data={Exit}
+        data={employeeData}
         columns={columns}
         View={view}
         Edit={Edit}
         Delete={Delete}
-        basePath="/admin/employeemanagement/exit-employee"
+        basePath="/admin/employeemanagement/employee-directory"
       />
     </div>
   );
