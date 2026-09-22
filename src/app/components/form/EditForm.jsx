@@ -37,7 +37,6 @@ export default function EditForm({
 
                 </div>
 
-
                 {/* FORM */}
                 <div className="p-6">
 

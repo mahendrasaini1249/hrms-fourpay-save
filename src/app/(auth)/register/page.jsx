@@ -1,10 +1,10 @@
-
 "use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import axios from "axios";
+
+import { registerUser } from "@/services/authApi";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -49,20 +49,17 @@ export default function RegisterPage() {
         try {
             setLoading(true);
 
-            const response = await axios.post(
-                "http://localhost:5000/api/auth/register",
-                {
-                    name: formData.name.trim(),
-                    email: formData.email.trim(),
-                    password: formData.password,
-                    role: formData.role,
-                }
-            );
+            const response = await registerUser({
+                name: formData.name.trim(),
+                email: formData.email.trim(),
+                password: formData.password,
+                role: formData.role,
+            });
 
-            console.log("Register Response:", response.data);
+            console.log("Register Response:", response);
 
             toast.success(
-                response.data?.message || "Registration successful!"
+                response?.message || "Registration successful!"
             );
 
             setFormData({
@@ -79,18 +76,21 @@ export default function RegisterPage() {
         } catch (error) {
             console.log("Register Error:", error);
 
-            if (error.response) {
+            if (error?.response) {
                 toast.error(
                     error.response.data?.message ||
                     "Registration failed"
                 );
-            } else if (error.request) {
-                toast.error("Backend server is not running.");
+            } else if (error?.request) {
+                toast.error(
+                    "Unable to connect to backend server."
+                );
             } else {
                 toast.error(
                     "Something went wrong. Please try again."
                 );
             }
+
         } finally {
             setLoading(false);
         }
@@ -115,6 +115,7 @@ export default function RegisterPage() {
                 {/* Header */}
                 <div className="text-center mb-3 py-4">
 
+                    {/* HRMS Logo */}
                     <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-lg font-bold text-white shadow">
                         H
                     </div>
@@ -139,6 +140,7 @@ export default function RegisterPage() {
                             value={formData.name}
                             onChange={handleChange}
                             placeholder="Enter your name"
+                            required
                             className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-100"
                         />
                     </div>
@@ -155,6 +157,7 @@ export default function RegisterPage() {
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="Enter your email"
+                            required
                             className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-100"
                         />
                     </div>
@@ -171,6 +174,7 @@ export default function RegisterPage() {
                             value={formData.password}
                             onChange={handleChange}
                             placeholder="Enter your password"
+                            required
                             className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-100"
                         />
 
@@ -189,6 +193,7 @@ export default function RegisterPage() {
                             name="role"
                             value={formData.role}
                             onChange={handleChange}
+                            required
                             className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-500 focus:ring-1 focus:ring-blue-100"
                         >
                             <option value="">
